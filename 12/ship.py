@@ -28,6 +28,8 @@ class Ship:
         self.moving_up = False
         self.moving_down = False
 
+
+
     def update(self):
         """根据移动标志调整飞船的位置"""
         # 更新飞船的center值，而不是rect
@@ -35,13 +37,18 @@ class Ship:
             self.center += self.ai_settings.ship_speed_factor
         if self.moving_left and self.rect.left > 0:
             self.center -= self.ai_settings.ship_speed_factor
-        if self.moving_up:
+        if self.moving_up and self.rect.top > 0:
             self.rect.centery -=1
-        if self.moving_down:
+        if self.moving_down and self.rect.bottom < self.screen_rect.bottom:
             self.rect.centery +=1
 
         # 根据self.center更新rect对象
         self.rect.centerx = self.center
+
+
+
+
+
 
     def blitme(self):
         """在指定位置绘制飞船"""
